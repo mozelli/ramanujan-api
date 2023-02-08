@@ -1,7 +1,7 @@
 const routes = require('express').Router();
 
-routes.get("/", (request, response) => {
-  response.send("Hello World")
-});
+const PostsController = require("../controllers/PostsController");
+
+routes.get("/", (request, response) => PostsController.teste(request, response));
 
 module.exports = { routes };
