@@ -7,7 +7,7 @@ const PostsSchema = new mongoose.Schema({
   },
   author: {
     type: String,
-    required: true,
+    default: "João Mozelli Neto"
   },
   category: {
     type: String,
