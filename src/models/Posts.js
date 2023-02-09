@@ -19,7 +19,7 @@ const PostsSchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    default: "published",
+    default: "sketch",
   },
   tags: {
     type: [String],
