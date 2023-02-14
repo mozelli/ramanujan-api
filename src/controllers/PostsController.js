@@ -30,16 +30,48 @@ module.exports = {
   },
   
   async createCategory(request, response) {
-    const [name, ascending] = request.body;
+    const { name, slug, ascending, description } = request.body;
 
     try {
       const newCategory = await Categories.create({
         name,
-        ascending
+        slug,
+        ascending,
+        description
       });
       return response.status(201).json(newCategory);
     } catch(error) {
       return response.status(500).json(error);
+    }
+  },
+
+  async listCategories(request, response) {
+    try {
+      const categoriesList = await Categories.find().sort("createdAt");
+      return response.status(200).json(categoriesList);
+    } catch (error) {
+      return response.status(500).json(error);
+    }
+  },
+
+  async updateCategory(request, response) {
+    const id = request.params.id;
+    const data = request.body;
+    try {
+      const category = await Categories.findByIdAndUpdate(id, data);
+      response.status(201).json(category);
+    } catch(error) {
+      response.status(500).json(error);
+    }
+  },
+  async deleteCategory(request, response) {
+    const id = request.params.id;
+    try {
+      const category = await Categories.findByIdAndRemove(id);
+      response.status(201).json(category);
+    } catch(error) {
+      console.log(error);
+      response.json(500).json(error);
     }
   }
 }
