@@ -11,7 +11,7 @@ const PostsSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    required: true,
+    required: "none",
   },
   text: {
     type: String,
@@ -19,16 +19,20 @@ const PostsSchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    default: "sketch",
+    default: "Rascunho",
   },
   tags: {
     type: [String],
     require: false,
   },
+  featuredImage: {
+    type: String,
+    required: false,
+  },
   createdAt: {
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now(),
+  }
 });
 
 const Posts = mongoose.model("Posts", PostsSchema);
